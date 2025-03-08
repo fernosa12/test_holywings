@@ -8,13 +8,14 @@ part of 'song_chart.dart';
 
 _$SongChartImpl _$$SongChartImplFromJson(Map<String, dynamic> json) =>
     _$SongChartImpl(
-      id: (json['id'] as num).toInt(),
-      name: json['name'] as String,
-      week: (json['week'] as num).toInt(),
-      year: (json['year'] as num).toInt(),
-      songs: (json['songs'] as List<dynamic>)
-          .map((e) => SongElement.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      id: (json['id'] as num?)?.toInt(),
+      name: json['name'] as String?,
+      week: (json['week'] as num?)?.toInt(),
+      year: (json['year'] as num?)?.toInt(),
+      songs: (json['songs'] as List<dynamic>?)
+              ?.map((e) => SongElement.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const [],
     );
 
 Map<String, dynamic> _$$SongChartImplToJson(_$SongChartImpl instance) =>
@@ -28,8 +29,10 @@ Map<String, dynamic> _$$SongChartImplToJson(_$SongChartImpl instance) =>
 
 _$SongElementImpl _$$SongElementImplFromJson(Map<String, dynamic> json) =>
     _$SongElementImpl(
-      position: (json['position'] as num).toInt(),
-      song: SongSong.fromJson(json['song'] as Map<String, dynamic>),
+      position: (json['position'] as num?)?.toInt(),
+      song: json['song'] == null
+          ? null
+          : SongSong.fromJson(json['song'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$SongElementImplToJson(_$SongElementImpl instance) =>
@@ -40,22 +43,22 @@ Map<String, dynamic> _$$SongElementImplToJson(_$SongElementImpl instance) =>
 
 _$SongSongImpl _$$SongSongImplFromJson(Map<String, dynamic> json) =>
     _$SongSongImpl(
-      id: (json['id'] as num).toInt(),
-      artistId: (json['artistId'] as num).toInt(),
-      artistName: json['artistName'] as String?,
-      artistProfilePicture: json['artistProfilePicture'],
-      title: json['title'] as String,
-      spotifyUrl: json['spotifyUrl'] as String?,
-      appleMusicUrl: json['appleMusicUrl'] as String?,
+      id: (json['id'] as num?)?.toInt(),
+      artistId: (json['artist_id'] as num?)?.toInt(),
+      artistName: json['artist_name'] as String?,
+      artistProfilePicture: json['artist_profile_picture'] as String?,
+      title: json['title'] as String?,
+      spotifyUrl: json['spotify_url'] as String?,
+      appleMusicUrl: json['apple_music_url'] as String?,
     );
 
 Map<String, dynamic> _$$SongSongImplToJson(_$SongSongImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'artistId': instance.artistId,
-      'artistName': instance.artistName,
-      'artistProfilePicture': instance.artistProfilePicture,
+      'artist_id': instance.artistId,
+      'artist_name': instance.artistName,
+      'artist_profile_picture': instance.artistProfilePicture,
       'title': instance.title,
-      'spotifyUrl': instance.spotifyUrl,
-      'appleMusicUrl': instance.appleMusicUrl,
+      'spotify_url': instance.spotifyUrl,
+      'apple_music_url': instance.appleMusicUrl,
     };

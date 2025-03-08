@@ -27,5 +27,22 @@ class HomeRepositoryImpl implements HomeRepository {
       return Left(Failure.parseFromException(e));
     }
   }
+  @override
+  Future<Either<Failure,SongChart>> songChart(
+      ) async {
+    final isConnected = await networkInfo.isConnected;
+    if (!isConnected) {
+      return Left(Failure.noConnection());
+    }
+    try {
+      final response = await api.songChart();
+      if (!response.success) {
+        return Left(Failure.serverError(response.message));
+      }
+      return Right(response.data!);
+    } catch (e) {
+      return Left(Failure.parseFromException(e));
+    }
+  }
 
 }

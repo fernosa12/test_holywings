@@ -48,13 +48,14 @@ void _useCases() {
   // _useCases
   di.registerSingleton<LoginUseCase>(LoginUseCase(di()));
   di.registerSingleton<GetBannerHomeUsecase>(GetBannerHomeUsecase(di()));
+  di.registerSingleton<SongChartUsecase>(SongChartUsecase(di()));
 }
 
 void _controllers() {
   // di.registerSingleton<AuthCubit>(AuthCubit(
   //   di(),
   // ));
-  di.registerLazySingleton(() => HomeController(di())); 
+  di.registerLazySingleton(() => HomeController(di(),di())); 
   
   // di.registerSingleton<SettingAddressProfileCubit>(
   //     SettingAddressProfileCubit(di(), di(), di(), di()));

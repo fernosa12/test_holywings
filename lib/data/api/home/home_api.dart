@@ -5,36 +5,16 @@ import '../../../lib.dart';
 
 abstract class HomeApi {
   Future<ApiResponse<List<BannerHome>>> bannerHome();
+  Future<ApiResponse<SongChart>>songChart();
 
-  // Future<ApiResponse<String>> changePassword(String userId, String password,
-  //     String newPassword, String confirmPassword);
-  // Future<String> register(
-  //   String username,
-  //   String email,
-  //   String phone,
-  //   String password,
-  //   String name,
-  // );
-  // Future<String> forgotPassword(String email);
-  // Future<void> logout();
-  // Future<ApiResponse<List<GetOtp>>> getOtpData(
-  //     String userId, String method, String newMailOrPhone);
+  
 }
 
 class HomeApiImpl implements HomeApi {
   final Dio dio;
 
   HomeApiImpl(this.dio);
-  // @override
-  // Future<String> forgotPassword(String email) async {
-  //   final response = await dio.post(
-  //     '/auth/forgetPassword',
-  //     data: {
-  //       'email': email,
-  //     },
-  //   );
-  //   return response.data['message'];
-  // }
+ 
 
   @override
   Future<ApiResponse<List<BannerHome>>> bannerHome() async {
@@ -44,6 +24,15 @@ class HomeApiImpl implements HomeApi {
     );
     return ApiResponse.fromResponse(response, (json) {
     return (json['data'] as List).map((item) => BannerHome.fromJson(item)).toList();
+  });
+  }
+  Future<ApiResponse<SongChart>> songChart() async {
+    final response = await dio.get(
+      'api/v1/songs/charts/latest',
+     
+    );
+    return ApiResponse.fromResponse(response, (json) {
+     return SongChart.fromJson(json['data']);
   });
   }
 
