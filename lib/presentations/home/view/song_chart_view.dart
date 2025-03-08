@@ -19,7 +19,7 @@ class TopChartView extends StatelessWidget {
         );
       }
 
-      // 🔹 Ambil hanya 10 lagu teratas
+      
       final top10Songs = controller.songChart.value!.songs!.take(10).toList();
 
       return Padding(
@@ -33,7 +33,7 @@ class TopChartView extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // **Title Section**
+             
               const Text(
                 "HWGPeople Top Charts",
                 style: TextStyle(
@@ -44,11 +44,11 @@ class TopChartView extends StatelessWidget {
               ),
               const SizedBox(height: 10),
 
-              // **Song List**
+              
               ListView.builder(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
-                itemCount: top10Songs.length, // ✅ Hanya tampilkan 10 lagu teratas
+                itemCount: top10Songs.length, 
                 itemBuilder: (context, index) {
                   final song = top10Songs[index];
 
@@ -83,7 +83,7 @@ class TopChartView extends StatelessWidget {
                         ),
                         const SizedBox(width: 12),
 
-                        // **Song Details**
+                      
                         Expanded(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -109,7 +109,7 @@ class TopChartView extends StatelessWidget {
 
               const SizedBox(height: 10),
 
-              // **Apple Music & Spotify Buttons**
+              
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -125,7 +125,7 @@ class TopChartView extends StatelessWidget {
     });
   }
 
-  /// **Helper untuk mendapatkan suffix ranking (1st, 2nd, 3rd, etc.)**
+  
   String _getRankSuffix(int number) {
     if (number == 1) return "st";
     if (number == 2) return "nd";
@@ -133,7 +133,7 @@ class TopChartView extends StatelessWidget {
     return "th";
   }
 
-  /// **Tombol Apple Music & Spotify**
+  
   Widget _buildMusicButton(String iconPath, String title) {
     return ElevatedButton.icon(
       onPressed: () {},
