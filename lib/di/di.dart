@@ -1,6 +1,9 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
+import 'package:test_clean_architecture/data/api/home/home_api.dart';
+import 'package:test_clean_architecture/domain/repositories/home/home_repositories.dart';
+import 'package:test_clean_architecture/presentations/home/get_home_controller/get_home_controller.dart';
 
 // import '../domain/usecases/change_password_usecase.dart';
 // import '../domain/usecases/get_banners_usecase.dart';
@@ -9,7 +12,6 @@ import 'package:get_it/get_it.dart';
 // import '../domain/usecases/get_tos_usecase.dart';
 // import '../domain/usecases/get_wishlist_usecase.dart';
 import '../lib.dart';
-import '../presentations/auth/auth.dart';
 // import '../presentations/category/cubit/category_cubit.dart';
 // import '../presentations/feedback/cubit/feedback_cubit.dart';
 // import '../presentations/search/cubit/search_cubit.dart';
@@ -24,7 +26,7 @@ setupInjection() {
     _datasources();
     _repositories();
     _useCases();
-    _cubits();
+    _controllers();
   } catch (e) {
     print(e);
   }
@@ -32,118 +34,28 @@ setupInjection() {
 
 void _datasources() {
   di.registerSingleton<AuthApi>(AuthApiImpl(di()));
-  // di.registerSingleton<ProfileApi>(ProfileApiImpl(di()));
-  // di.registerSingleton<BankApi>(BankApiImpl(di()));
-  // // di.registerSingleton<ScurityApi>(ScurityApiImpl(di()));
-  // di.registerSingleton<PersonalDataApi>(PersonalDataApiImpl(di()));
-  // di.registerSingleton<AddressApi>(AddressApiImpl(di()));
-  // di.registerSingleton<ServiceApi>(ServiceApiImpl(di()));
-  // di.registerSingleton<CategoryApi>(CategoryApiImpl(di()));
-  // di.registerSingleton<BannerApi>(BannerApiImpl(di()));
-  // di.registerSingleton<TransactionsBuyerApi>(TransactionsApiBuyerImpl(di()));
-  // di.registerSingleton<FeedbackApi>(FeedbackApiImpl(di()));
-  // di.registerSingleton<ReplyTemplateApi>(ReplyTemplateApiImpl(di()));
-  // di.registerSingleton<SaldoApi>(SaldoApiImpl(di()));
-  // di.registerSingleton<WishlistApi>(WishlistApiImpl(di()));
+  di.registerSingleton<HomeApi>(HomeApiImpl(di()));
 }
 
 void _repositories() {
   // _repositories
   di.registerSingleton<AuthRepository>(AuthRepositoryImpl(di(), di()));
-  // di.registerSingleton<ProfileRepository>(ProfileRepositoryImpl(di(), di()));
-  // di.registerSingleton<BankRepository>(BankRepositoryImpl(di(), di()));
-  // di.registerSingleton<PersonalDataRepository>(
-  //     PersonalDataRepositoryImpl(di(), di()));
-  // di.registerSingleton<AddressRepository>(AddressRepositoryImpl(di(), di()));
-  // // di.registerSingleton<ScurityRepository>(ScurityRepositoryImpl(di(), di()));
-  // di.registerSingleton<ServicesRepository>(ServiceRepositoryImpl(di(), di()));
-  // di.registerSingleton<CategoryRepository>(CategoryRepositoryImpl(di(), di()));
-  // di.registerSingleton<BannerRepository>(BannerRepositoryImpl(di(), di()));
-  // di.registerSingleton<TransactionsRepository>(
-  //     TransactionsBuyerRepositoryImpl(di(), di()));
-  // di.registerSingleton<FeedbackRepository>(FeedbackRepositoryImpl(di(), di()));
-  // di.registerSingleton<ReplyTemplateRepository>(
-  //     ReplyTemplateRepositoryImpl(di(), di()));
-  // di.registerSingleton<SaldoRepository>(SaldoRepositoryImpl(di(), di()));
-  // di.registerSingleton<WishlistRepository>(WishlistRepositoryImpl(di(), di()));
+  di.registerSingleton<HomeRepository>(HomeRepositoryImpl(di(), di()));
+  
 }
 
 void _useCases() {
   // _useCases
   di.registerSingleton<LoginUseCase>(LoginUseCase(di()));
-  // di.registerSingleton<ChangePasswordUsecase>(ChangePasswordUsecase(di()));
-  // di.registerSingleton<ForgotPasswordUsecase>(ForgotPasswordUsecase(di()));
-  // di.registerSingleton<RegisterUsecase>(RegisterUsecase(di()));
-
-  /// profile
-//   di.registerSingleton<GetProfileUsecase>(GetProfileUsecase(di()));
-
-//   //profile setting personal data
-//   di.registerSingleton<UpdatePersonalDataUseCase>(
-//       UpdatePersonalDataUseCase(di()));
-
-//   //profile setting scurity
-//   di.registerSingleton<GetOtpUseCase>(GetOtpUseCase(di()));
-
-//   //profile setting bank
-//   di.registerSingleton<GetBankUserUsecase>(GetBankUserUsecase(di()));
-//   di.registerSingleton<GetRekeningUsecase>(GetRekeningUsecase(di()));
-//   di.registerSingleton<AddRekeningUsecase>(AddRekeningUsecase(di()));
-
-// //profile setting address
-//   di.registerSingleton<GetAddressUsecase>(GetAddressUsecase(di()));
-//   di.registerSingleton<AddAddressUserUsecase>(AddAddressUserUsecase(di()));
-//   di.registerSingleton<DeleteAddressUserUsecase>(
-//       DeleteAddressUserUsecase(di()));
-//   di.registerSingleton<EditAddressUsecase>(EditAddressUsecase(di()));
-//   di.registerSingleton<SetMainAddressUsecase>(SetMainAddressUsecase(di()));
-
-//   /// services
-//   di.registerSingleton(GetPopularServicesUsecase(di()));
-//   di.registerSingleton(GetServicesUsecase(di()));
-//   di.registerSingleton(GetOurServiceUsecase(di()));
-//   di.registerSingleton(GetRecommendedServicesUsecase(di()));
-//   di.registerSingleton(GetMySearchesUsecase(di()));
-//   di.registerSingleton(GetTosUsecase(di()));
-
-//   /// categories
-//   di.registerSingleton(GetCategoriesUsecase(di()));
-//   di.registerSingleton(GetSubCategoryUsecase(di()));
-
-//   // transactions
-//   di.registerSingleton(GetListTransactionsBuyerUsecase(di()));
-
-// //Ulasan Buyer
-//   di.registerSingleton(GetNotYetReviewedUsecase(di()));
-//   di.registerSingleton(GetMyFeedbackUsecase(di()));
-//   di.registerSingleton(GetSellerFeedbackUsecase(di()));
-//   di.registerSingleton(GetDetailNotYetReviewedUsecase(di()));
-//   di.registerSingleton(GetDetailMyFeedbackUsecase(di()));
-//   di.registerSingleton(GetDetailSellerReviewUsecase(di()));
-
-//   /// banner
-//   di.registerSingleton(GetBannersUsecase(di()));
-
-//   // reply template
-//   di.registerSingleton(GetReplyTemplateUsecase(di()));
-//   di.registerSingleton(AddReplyTemplateUsecase(di()));
-//   di.registerSingleton(EditReplyTemplateUsecase(di()));
-//   di.registerSingleton(SetPrimaryReplyTemplateUsecase(di()));
-//   di.registerSingleton(DeleteReplyTemplateUsecase(di()));
-
-//   // wishlist
-//   di.registerSingleton(GetWishlistUsecase(di()));
-//   di.registerSingleton(AddWishlistUsecase(di()));
-//   di.registerSingleton(DeleteWishlistUsecase(di()));
-
-//   /// saldo
-//   di.registerSingleton(GetSaldoUsecase(di()));
+  di.registerSingleton<GetBannerHomeUsecase>(GetBannerHomeUsecase(di()));
 }
 
-void _cubits() {
-  di.registerSingleton<AuthCubit>(AuthCubit(
-    di(),
-  ));
+void _controllers() {
+  // di.registerSingleton<AuthCubit>(AuthCubit(
+  //   di(),
+  // ));
+  di.registerLazySingleton(() => HomeController(di())); 
+  
   // di.registerSingleton<SettingAddressProfileCubit>(
   //     SettingAddressProfileCubit(di(), di(), di(), di()));
 
@@ -187,7 +99,7 @@ void _utils() {
     () {
       final dio = Dio();
       dio.options.baseUrl = AppConfig.baseUrl;
-      dio.interceptors.add(DioTokenInterceptor(di.call, di()));
+      // dio.interceptors.add(DioTokenInterceptor(di.call, di()));
       dio.interceptors.add(LogInterceptor());
       return dio;
     },

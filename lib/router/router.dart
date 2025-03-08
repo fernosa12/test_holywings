@@ -12,29 +12,36 @@ AppRouter router = di();
 )
 class AppRouter extends RootStackRouter {
   @override
+  
+  @override
   List<AutoRoute> get routes => [
         AutoRoute(
           page: InitialRoute.page,
         ),
         AutoRoute(
-          page: AuthRoute.page,
+          page: HomeRoute.page,
+          
+          
           initial: true,
           children: [
-            AutoRoute(
-              initial: true,
-              page: LoginRoute.page,
-              guards: const [
-                // GuestGuard(),
-              ],
-            ),
+              AutoRoute(
+          page: AuthRoute.page,
+          guards: const [],
+      
+          
+        ),
           ],
         ),
-        AutoRoute(
-          page: HomeRoute.page,
-          guards: const [],
-        ),
+      
+       
       ];
 
   @override
   RouteType get defaultRouteType => const RouteType.cupertino();
 }
+        
+       
+      
+      
+
+
